@@ -2,7 +2,7 @@
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-// BANKIST APP
+// JSBank APP
 
 // Data
 const account1 = {
@@ -20,14 +20,14 @@ const account2 = {
 }
 
 const account3 = {
-    owner: 'Joe Customer',
+    owner: 'Bob Customer',
     movements: [200, -200, 340, -300, -20, 50, 400, -460],
     interestRate: 0.7,
     pin: 3333,
 }
 
 const account4 = {
-    owner: 'Jane Client',
+    owner: 'Mary Client',
     movements: [430, 1000, 700, 50, 90],
     interestRate: 1,
     pin: 4444,
@@ -62,13 +62,14 @@ const inputCloseUsername = document.querySelector('.form__input--user')
 const inputClosePin = document.querySelector('.form__input--pin')
 
 const displayMovements = movements => {
+    containerMovements.innerHTML = ''
     movements.forEach((movement, i) => {
         const type = movement > 0 ? 'deposit' : 'withdrawal'
         const html = /*html*/ `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1
             } ${type}</div>
-          <div class="movements__value">4 000€</div>
+          <div class="movements__value">${movement}</div>
         </div>
         `
 
@@ -77,6 +78,18 @@ const displayMovements = movements => {
 }
 
 displayMovements(account1.movements)
+
+const createUsernames = accounts => {
+    accounts.forEach(account => {
+        account.username = account.owner
+            .toLowerCase()
+            .split(' ')
+            .map(name => name[0])
+            .join('')
+    })
+}
+
+createUsernames(accounts)
 
 const currencies = new Map([
     ['USD', 'United States dollar'],

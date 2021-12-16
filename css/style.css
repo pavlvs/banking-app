@@ -28,13 +28,14 @@ nav {
   padding: 1rem 2rem;
 }
 
-.welcome,
-.logo {
-  font-size: 1.9rem;
-  font-weight: 500;
+.welcome {
+  font-size: 1.6rem;
+  margin-right: 2rem;
+  margin-top: 0.6rem;
 }
 
 .logo {
+  font-weight: 500;
   font-size: 2.5rem;
 }
 
