@@ -68,7 +68,7 @@ const displayMovements = movements => {
         const html = /*html*/ `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1
-            } ${type}</div>
+            }. ${type}</div>
           <div class="movements__value">${movement}</div>
         </div>
         `
@@ -78,6 +78,13 @@ const displayMovements = movements => {
 }
 
 displayMovements(account1.movements)
+
+const calcDisplayBalance = (movements) => {
+    const balance = movements.reduce((acc, mov) => acc + mov, 0)
+    labelBalance.textContent = `${balance} EUR`
+}
+
+calcDisplayBalance(account2.movements)
 
 const createUsernames = accounts => {
     accounts.forEach(account => {
