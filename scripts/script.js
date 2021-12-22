@@ -129,7 +129,7 @@ btnLogin.addEventListener('click', ev => {
     currentAccount = accounts.find(
         acct => acct.username === inputLoginUsername.value
     )
-    console.log(currentAccount.username)
+
 
     if (currentAccount?.pin === Number(inputLoginPin.value)) {
         console.log('LOGIN')
@@ -155,6 +155,8 @@ btnTransfer.addEventListener('click', ev => {
     const receivingAccount = accounts.find(
         acct => acct.username == inputTransferTo.value
     )
+
+    inputTransferAmount.value = inputTransferTo.value = ''
 
     if (
         amount > 0 &&
