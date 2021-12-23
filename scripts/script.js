@@ -61,9 +61,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount')
 const inputCloseUsername = document.querySelector('.form__input--user')
 const inputClosePin = document.querySelector('.form__input--pin')
 
-const displayMovements = movements => {
+const displayMovements = (movements, sort = false) => {
     containerMovements.innerHTML = ''
-    movements.forEach((movement, i) => {
+
+    const movs = sort ? movements.slice().sort((a, b) => a - b) : movements
+    movs.forEach((movement, i) => {
         const type = movement > 0 ? 'deposit' : 'withdrawal'
         const html = /*html*/ `
         <div class="movements__row">
@@ -202,6 +204,13 @@ btnClose.addEventListener('click', ev => {
         containerApp.style.opacity = 0
     }
     inputCloseUsername.value = inputClosePin.value = ''
+})
+
+let sorted = false
+btnSort.addEventListener('click', ev => {
+    ev.preventDefault()
+    displayMovements(currentAccount.movements, !sorted)
+    sorted = !sorted
 })
 
 const currencies = new Map([
