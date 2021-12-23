@@ -113,7 +113,7 @@ const createUsernames = accounts => {
 
 createUsernames(accounts)
 
-const updateUI = (account) => {
+const updateUI = account => {
     // Display movements
     displayMovements(account.movements)
     // Display balance
@@ -130,7 +130,6 @@ btnLogin.addEventListener('click', ev => {
         acct => acct.username === inputLoginUsername.value
     )
 
-
     if (currentAccount?.pin === Number(inputLoginPin.value)) {
         console.log('LOGIN')
         // Display UI and message
@@ -144,7 +143,6 @@ btnLogin.addEventListener('click', ev => {
 
         // Update UI
         updateUI(currentAccount)
-
     }
 })
 
@@ -169,8 +167,27 @@ btnTransfer.addEventListener('click', ev => {
         receivingAccount.movements.push(amount)
         // Update UI
         updateUI(currentAccount)
-
     }
+})
+
+btnClose.addEventListener('click', ev => {
+    ev.preventDefault()
+
+    if (
+        currentAccount.username === inputCloseUsername.value &&
+        currentAccount.pin === Number(inputClosePin.value)
+    ) {
+        const index = accounts.findIndex(
+            acct => acct.username === currentAccount.username
+        )
+
+        //Delete account
+        accounts.splice(index, 1)
+
+        //Hide UI
+        containerApp.style.opacity = 0
+    }
+    inputCloseUsername.value = inputClosePin.value = ''
 })
 
 const currencies = new Map([
