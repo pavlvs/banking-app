@@ -170,6 +170,20 @@ btnTransfer.addEventListener('click', ev => {
     }
 })
 
+btnLoan.addEventListener('click', ev => {
+    ev.preventDefault()
+    console.log('in the right place')
+    const amount = Number(inputLoanAmount.value)
+
+    if (amount > 0 && currentAccount.movements.some(movement => movement >= amount * 0.1)) {
+        // Add movement
+        currentAccount.movements.push(amount)
+        // Update UI
+        updateUI(currentAccount)
+    }
+    inputLoanAmount.value = ''
+})
+
 btnClose.addEventListener('click', ev => {
     ev.preventDefault()
 
