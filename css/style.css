@@ -19,6 +19,12 @@ body {
   padding: 0;
 }
 
+#information {
+  height: 70px;
+  max-width: 100rem;
+  margin: 1rem auto;
+}
+
 nav {
   background-color: #024731;
   color: #fff;
@@ -214,6 +220,11 @@ nav {
   font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
+}
+
+.btn--close-info {
+  cursor: pointer;
+  font-weight: 700;
 }
 
 /* OPERATIONS */
