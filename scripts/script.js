@@ -1,9 +1,9 @@
 'use strict'
 
 /////////////////////////////////////////////////
-/////////////////////////////////////////////////
 // JSBank APP
 
+/////////////////////////////////////////////////
 // Data
 const account1 = {
     owner: 'Jack Everyman',
@@ -47,7 +47,9 @@ const account2 = {
 
 const accounts = [account1, account2]
 
+///////////////////////////////////////////////////////////////////////////
 // Elements
+
 const labelWelcome = document.querySelector('.welcome')
 const labelDate = document.querySelector('.date')
 const labelBalance = document.querySelector('.balance__value')
@@ -59,6 +61,7 @@ const labelTimer = document.querySelector('.timer')
 const containerApp = document.querySelector('.app')
 const containerMovements = document.querySelector('.movements')
 const infobox = document.querySelector('#information')
+const forgetme = document.querySelector('#forgetme')
 
 const btnLogin = document.querySelector('.login__btn')
 const btnTransfer = document.querySelector('.form__btn--transfer')
@@ -200,17 +203,57 @@ const updateUI = account => {
     calcDisplaySummary(account)
 }
 
+const startLogoutTimer = () => {
+    const tick = () => {
+
+        const minutes = String(Math.trunc(time / 60)).padStart(2, 0)
+        const seconds = String(time % 60).padStart(2, 0)
+
+        // In each call print remaining time to UI
+        labelTimer.textContent = `${minutes}:${seconds}`
+
+
+
+        //When 0 seconds stop timer and log the user out
+        if (time === 0) {
+            clearInterval(timer)
+            containerApp.style.opacity = 0
+            labelWelcome.textContent = 'Log in to get started'
+
+        }
+
+        // Decrease one second
+        time--
+    }
+
+    // Set time to 5 minute
+    let time = 60
+
+    // call the timer every second
+    tick()
+    const timer = setInterval(tick, 1000)
+    return timer
+
+}
+
+///////////////////////////////////////////////////////////////////////////
 // Event Handlers
+
 btnCloseInfo.addEventListener('click', ev => {
     infobox.style.display = 'none'
+    if (forgetme.checked) {
+        localStorage.setItem('dontshow', true)
+    }
 })
 
-let currentAccount
+window.addEventListener('load', ev => {
+    console.log('we are laded')
+    if (localStorage.getItem('dontshow')) {
+        infobox.style.display = 'none'
+    }
+})
 
-//FAKE ALWAYS LOGGED IN
-currentAccount = account1
-updateUI(currentAccount)
-containerApp.style.opacity = 100
+let currentAccount, timer
 
 btnLogin.addEventListener('click', ev => {
     ev.preventDefault()
@@ -249,6 +292,12 @@ btnLogin.addEventListener('click', ev => {
         inputLoginPin.value = ''
         inputLoginPin.blur()
 
+        // Timer
+        if (timer) {
+            clearInterval(timer)
+        }
+        timer = startLogoutTimer()
+
         // Update UI
         updateUI(currentAccount)
     }
@@ -276,8 +325,13 @@ btnTransfer.addEventListener('click', ev => {
         //Add transfer date
         currentAccount.movementsDates.push(new Date().toISOString())
         receivingAccount.movementsDates.push(new Date().toISOString())
+
         // Update UI
         updateUI(currentAccount)
+
+        // Reset the logout timer
+        clearInterval(timer)
+        timer = startLogoutTimer()
     }
 })
 
@@ -297,8 +351,14 @@ btnLoan.addEventListener('click', ev => {
 
         // Update UI
         updateUI(currentAccount)
+
+        // Reset the logout timer
+        clearInterval(timer)
+        timer = startLogoutTimer()
     }
     inputLoanAmount.value = ''
+
+
 })
 
 btnClose.addEventListener('click', ev => {
@@ -327,11 +387,3 @@ btnSort.addEventListener('click', ev => {
     displayMovements(currentAccount.movements, !sorted)
     sorted = !sorted
 })
-
-const currencies = new Map([
-    ['USD', 'United States dollar'],
-    ['EUR', 'Euro'],
-    ['GBP', 'Pound sterling'],
-])
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]

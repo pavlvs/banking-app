@@ -20,9 +20,23 @@ body {
 }
 
 #information {
-  height: 70px;
+  min-height: 70px;
   max-width: 100rem;
   margin: 1rem auto;
+  position: relative;
+}
+
+.btn--close-info {
+  position: absolute;
+  font-size: 1.4rem;
+  color: #aaa;
+  top: 0px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.btn--close-info:hover {
+  color: #000;
 }
 
 nav {
