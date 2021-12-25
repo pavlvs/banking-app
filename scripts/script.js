@@ -227,7 +227,7 @@ const startLogoutTimer = () => {
     }
 
     // Set time to 5 minute
-    let time = 60
+    let time = 300
 
     // call the timer every second
     tick()
