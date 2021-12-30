@@ -19,18 +19,41 @@ body {
   padding: 0;
 }
 
+input[type='checkbox'],
+input[type='radio'] {
+  vertical-align: middle;
+  position: relative;
+  bottom: 0.08em; /* this is a better value for different fonts! */
+}
+
 #information {
   min-height: 70px;
   max-width: 100rem;
   margin: 1rem auto;
   position: relative;
+  padding: 2rem;
+  background-color: #2a2c36;
+  color: #fff;
+}
+
+#information div {
+  width: 90%;
+}
+
+#information p {
+  font-size: 1.3rem;
+}
+
+#information span {
+  color: #e3482c;
+  font-weight: bold;
 }
 
 .btn--close-info {
   position: absolute;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #aaa;
-  top: 0px;
+  top: 5px;
   right: 10px;
   cursor: pointer;
 }

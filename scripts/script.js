@@ -247,7 +247,6 @@ btnCloseInfo.addEventListener('click', ev => {
 })
 
 window.addEventListener('load', ev => {
-    console.log('we are laded')
     if (localStorage.getItem('dontshow')) {
         infobox.style.display = 'none'
     }

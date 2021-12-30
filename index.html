@@ -24,17 +24,20 @@
   <body>
     <!-- INFORMATIONAL MESSAGE -->
     <section id="information">
-      <p>Welcome to the JS Bank demo app</p>
-      <p>
-        Use the following credentials to log in: User: 'je' Pin: 1111 or user:
-        'jd' pin: 2222. Use the same user names to transfer amounts between
-        accounts. The logged in user can close their account with their user and
-        pin combination.
-      </p>
-      <form action="">
-        <input type="checkbox" id="forgetme" />
-        Do not show this again
-      </form>
+      <div>
+        <p>Welcome to the JS Bank demo app.</p>
+        <p>
+          Use the following credentials to log in:&nbsp;
+          <span>user: 'je' Pin: 1111</span> or
+          <span>user: 'jd' pin: 2222</span>. <br />Use the same user names to
+          transfer amounts between accounts. The logged in user can close their
+          account with their user and pin combination.
+        </p>
+        <form action="">
+          <input type="checkbox" id="forgetme" />
+          <label for="forgetme">Do not show this again</label>
+        </form>
+      </div>
       <span class="btn--close-info">X</span>
     </section>
     <!-- TOP NAVIGATION -->
